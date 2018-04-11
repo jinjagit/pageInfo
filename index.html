@@ -18,14 +18,26 @@ function updateText() {
   winInH = window.innerHeight;
   WinOutH = window.outerHeight;
   screenH = screen.height;
+  winRatio = round(window.innerWidth / window.innerHeight, 3);
 
   if (screen.width < window.innerWidth) {
     mobile = true;
   } else {mobile = false;}
 
-  para.innerHTML = "winInW: " + winInW + "   WinOutW: " + WinOutW + "  screenW: " + screenW
-    + "</br>winInH: " + winInH + "   WinOutH: " + WinOutH + "  screenH: " + screenH
-    + "</br>mobile: " + mobile;
+  para.innerHTML = "winInW: " + winInW + "    WinOutW: " + WinOutW + "   screenW: " + screenW
+    + "</br>winInH: " + winInH + "    WinOutH: " + WinOutH + "   screenH: " + screenH
+    + "</br>mobile: " + mobile + "    ratio: " + winRatio;
+}
+
+function round(number, precision) {
+  var shift = function (number, precision, reverseShift) {
+    if (reverseShift) {
+      precision = -precision;
+    }
+    numArray = ("" + number).split("e");
+    return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+  };
+  return shift(Math.round(shift(number, precision, false)), precision, true);
 }
 
 function enterFullscreen() { // https://hacks.mozilla.org/2012/01/using-the-fullscreen-api-in-web-browsers/
@@ -52,6 +64,8 @@ let screenW = 0;
 let winInH = 0;
 let WinOutH = 0;
 let screenH = 0;
+
+let winRatio = 0;
 
 let mobile = false;
 
